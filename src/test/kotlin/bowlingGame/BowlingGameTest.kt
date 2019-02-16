@@ -6,6 +6,7 @@ package test.kotlin.bowlingGame
 import main.kotlin.bowlingGame.BowlingGame
 import org.hamcrest.core.IsEqual.equalTo
 import org.junit.Assert.assertThat
+import org.junit.Assert.fail
 import org.junit.Test
 
 class BowlingGameTest {
@@ -27,5 +28,10 @@ class BowlingGameTest {
         }
 
         assertThat(game.score(), equalTo(10))
+    }
+
+    @Test
+    fun testWithSpare() {
+        fail("todo")
     }
 }
