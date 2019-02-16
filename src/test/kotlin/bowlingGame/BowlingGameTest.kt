@@ -7,26 +7,34 @@ import main.kotlin.bowlingGame.BowlingGame
 import org.hamcrest.core.IsEqual.equalTo
 import org.junit.Assert.assertThat
 import org.junit.Assert.fail
+import org.junit.Before
 import org.junit.Test
 
 class BowlingGameTest {
+
+    private lateinit var game: BowlingGame
+
+    @Before
+    fun setUp() {
+        game = BowlingGame()
+    }
+
+
+    private fun rollPinsNTimes(times :Int , pins: Int) {
+        for(i in 0 until times) {
+            game.roll(pins)
+        }
+    }
+
     @Test
     fun testAppScoreEqualsToZeroWhenTenMiss() {
-        val game = BowlingGame()
-        for(i in 0..10) {
-            game.roll(0)
-        }
-
+        rollPinsNTimes(10, 0)
         assertThat(game.score(), equalTo(0))
     }
 
     @Test
     fun testAppScoreEqualsToTenWhenTenOne() {
-        val game = BowlingGame()
-        for(i in 0..9) {
-            game.roll(1)
-        }
-
+        rollPinsNTimes(10, 1)
         assertThat(game.score(), equalTo(10))
     }
 
