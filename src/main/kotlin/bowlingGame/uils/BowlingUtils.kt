@@ -13,7 +13,7 @@ class BowlingUtils {
         }
 
         fun spareBonus(playedFrames: List<Frame>, index: Int): Int {
-            return playedFrames[index + 1].rolls[0].pins
+            return  playedFrames[index + 1].rolls[0].pins
         }
 
         fun strikeBonus(playedFrames: List<Frame>, index: Int): Int {

@@ -63,4 +63,10 @@ class BowlingGameTest {
         rollPinsNTimes(16, 0)
         assertThat("On strike you must add the two next roll", game.score(), equalTo(24))
     }
+
+    @Test
+    fun testPerfectGame() {
+        rollPinsNTimes(12, 10)
+        assertThat("On strike you must add the two next roll", game.score(), equalTo(300))
+    }
 }

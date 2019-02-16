@@ -30,6 +30,8 @@ class BowlingGame {
         var score = 0
 
         for ((index, element) in playedFrames.withIndex()) {
+            if (index > playedFrames.size - 3) break
+
             score += when {
                 BowlingUtils.isStrike(element) -> 10 + strikeBonus(playedFrames, index)
                 BowlingUtils.isSpare(element) -> 10 + spareBonus(playedFrames, index)
