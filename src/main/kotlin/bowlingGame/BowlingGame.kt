@@ -3,11 +3,20 @@
  */
 package main.kotlin.bowlingGame
 
+import main.kotlin.bowlingGame.model.Frame
+
 class BowlingGame {
-    var score = 0
+    var playedFrames = mutableListOf<Frame>()
 
     fun roll(i: Int) {
-        score += i
+        if (playedFrames.isNotEmpty() &&
+                playedFrames.last().mayRollAgain()) {
+            playedFrames.last().roll(i)
+        } else {
+            val frame = Frame()
+            frame.roll(i)
+            playedFrames.add(frame)
+        }
     }
 
     fun start() {
@@ -15,9 +24,15 @@ class BowlingGame {
     }
 
     fun score(): Int? {
+        var score = 0
+
+        val it = playedFrames.iterator()
+        while (it.hasNext()) {
+            score += it.next().score()
+        }
+
         return score
     }
-
 }
 
 fun main(args: Array<String>) {
