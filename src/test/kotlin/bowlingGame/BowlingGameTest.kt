@@ -42,7 +42,7 @@ class BowlingGameTest {
     @Test
     fun testAppScoreEqualsToTenWhenTenOne() {
         rollPinsNTimes(10, 1)
-        assertThat(game.score(), equalTo(10))
+        assertThat("Just counting pin in standard cases", game.score(), equalTo(10))
     }
 
     @Test
@@ -51,7 +51,7 @@ class BowlingGameTest {
         game.roll(5)
 
         rollPinsNTimes(17, 0)
-        assertThat(game.score(), equalTo(20))
+        assertThat("On Spare you must add only next roll to current score", game.score(), equalTo(20))
     }
 
     @Test
