@@ -8,11 +8,24 @@ class BowlingUtils {
             return element.rolls.size == 2 && element.score() == 10
         }
 
-        fun getNextRollValue(playedFrames: List<Frame>, index: Int): Int {
-            return if (playedFrames.size == index - 1) {
-                0
+        fun isStrike(element: Frame): Boolean {
+            return element.rolls.size == 1 && element.score() == 10
+        }
+
+        fun spareBonus(playedFrames: List<Frame>, index: Int) : Int {
+            return playedFrames[index + 1].rolls[0].pins
+        }
+
+        fun strikeBonus(playedFrames: List<Frame>, index: Int) : Int {
+            return BowlingUtils.getTwoRollValue(playedFrames, index)
+        }
+
+        private fun getTwoRollValue(playedFrames: List<Frame>, index: Int): Int {
+            val nextFrame = playedFrames[index + 1]
+            return if (nextFrame.rolls.size == 2) {
+                nextFrame.score()
             } else {
-                playedFrames[index + 1].rolls[0].pins
+                nextFrame.score() + playedFrames[index + 2].rolls[0].pins
             }
         }
     }

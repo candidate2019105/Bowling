@@ -12,7 +12,7 @@ open class Frame {
     }
 
     fun mayRollAgain(): Boolean {
-        return rolls.size < 2
+        return rolls.size < 2 && rolls[0].pins != 10
     }
 
     fun roll(i: Int) {
