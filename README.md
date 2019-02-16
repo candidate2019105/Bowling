@@ -1,4 +1,9 @@
 <h1>Readme
 
-<h2> About
-<p> This project is about BowlingGame Code Kata. 
+<p> Assuming that you already have Gradle installed on your computer.
+ 
+<h2> Compile and Run
+<p> use `./gradle build`
+<p> use `./gradle run`
+
+ 
