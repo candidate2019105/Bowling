@@ -69,4 +69,20 @@ class BowlingGameTest {
         rollPinsNTimes(12, 10)
         assertThat("On strike you must add the two next roll", game.score(), equalTo(300))
     }
+
+    @Test
+    fun testFullSpareGame() {
+        rollSpare()
+        rollSpare()
+        rollSpare()
+        rollSpare()
+        rollSpare()
+        rollSpare()
+        rollSpare()
+        rollSpare()
+        rollSpare()
+        rollSpare()
+        rollPinsNTimes(1, 5)
+        assertThat("On spare you must add the two next roll", game.score(), equalTo(150))
+    }
 }
