@@ -3,6 +3,8 @@
  */
 package main.kotlin.bowlingGame
 
+import main.kotlin.bowlingGame.model.Frame
+
 class BowlingGame {
     val greeting: String
         get() {
@@ -11,5 +13,5 @@ class BowlingGame {
 }
 
 fun main(args: Array<String>) {
-    println(BowlingGame().greeting)
+    BowlingGame().start()
 }

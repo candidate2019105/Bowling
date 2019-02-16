@@ -4,12 +4,18 @@
 package test.kotlin.bowlingGame
 
 import main.kotlin.bowlingGame.BowlingGame
+import org.hamcrest.core.IsEqual.equalTo
+import org.junit.Assert.assertThat
 import org.junit.Test
-import kotlin.test.assertNotNull
 
 class BowlingGameTest {
     @Test
-    fun testAppHasAGreeting() {
-        assertNotNull(BowlingGame(), "app should be present")
+    fun testAppScoreEqualsToZeroWhenTenMiss() {
+        val game = BowlingGame()
+        for(i in 0..10) {
+            game.roll(0)
+        }
+
+        assertThat(game.score(), equalTo(0))
     }
 }
