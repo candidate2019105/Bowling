@@ -18,4 +18,14 @@ class BowlingGameTest {
 
         assertThat(game.score(), equalTo(0))
     }
+
+    @Test
+    fun testAppScoreEqualsToTenWhenTenOne() {
+        val game = BowlingGame()
+        for(i in 0..10) {
+            game.roll(1)
+        }
+
+        assertThat(game.score(), equalTo(1))
+    }
 }
