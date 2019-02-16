@@ -1,3 +1,3 @@
 package main.kotlin.bowlingGame.model
 
-class Roll(val pins:Int)
+class Roll(val pins: Int)

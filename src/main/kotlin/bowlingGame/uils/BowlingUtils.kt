@@ -12,11 +12,11 @@ class BowlingUtils {
             return element.rolls.size == 1 && element.score() == 10
         }
 
-        fun spareBonus(playedFrames: List<Frame>, index: Int) : Int {
+        fun spareBonus(playedFrames: List<Frame>, index: Int): Int {
             return playedFrames[index + 1].rolls[0].pins
         }
 
-        fun strikeBonus(playedFrames: List<Frame>, index: Int) : Int {
+        fun strikeBonus(playedFrames: List<Frame>, index: Int): Int {
             return BowlingUtils.getTwoRollValue(playedFrames, index)
         }
 
