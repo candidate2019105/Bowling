@@ -3,6 +3,9 @@
  */
 package main.kotlin.bowlingGame
 
+import Parameters.Companion.MAX_PIN_NUMBER
+import Parameters.Companion.MAX_ROUNDS
+import main.kotlin.bowlingGame.model.BonusFrame
 import main.kotlin.bowlingGame.model.Frame
 import main.kotlin.bowlingGame.uils.BowlingUtils
 import main.kotlin.bowlingGame.uils.BowlingUtils.Companion.spareBonus
@@ -16,21 +19,17 @@ class BowlingGame {
                 playedFrames.last().mayRollAgain()) {
             playedFrames.last().roll(i)
         } else {
-            val frame = Frame()
+            val frame = if (playedFrames.size >= MAX_ROUNDS) BonusFrame() else Frame()
             frame.roll(i)
             playedFrames.add(frame)
         }
-    }
-
-    fun start() {
-
     }
 
     fun score(): Int? {
         var score = 0
 
         for ((index, element) in playedFrames.withIndex()) {
-            if (index > playedFrames.size - 3) break
+            if (element is BonusFrame) break
 
             score += when {
                 BowlingUtils.isStrike(element) -> 10 + strikeBonus(playedFrames, index)
@@ -44,5 +43,15 @@ class BowlingGame {
 }
 
 fun main(args: Array<String>) {
-    BowlingGame().start()
+    val game = BowlingGame()
+
+    for (element in args) {
+        when (element) {
+            "-" -> game.roll(MAX_PIN_NUMBER - game.playedFrames.last().score())
+            "x" -> game.roll(10)
+            else -> element.toIntOrNull()?.let { game.roll(it) }
+        }
+    }
+
+    println("Your score is : ${game.score()}")
 }
