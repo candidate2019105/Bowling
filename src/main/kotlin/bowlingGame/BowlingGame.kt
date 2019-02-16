@@ -4,8 +4,10 @@
 package main.kotlin.bowlingGame
 
 class BowlingGame {
-    fun roll(i: Int) {
+    var score = 0
 
+    fun roll(i: Int) {
+        score += i
     }
 
     fun start() {
@@ -13,7 +15,7 @@ class BowlingGame {
     }
 
     fun score(): Int? {
-        return 0
+        return score
     }
 
 }

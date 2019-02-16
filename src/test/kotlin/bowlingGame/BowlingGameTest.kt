@@ -22,10 +22,10 @@ class BowlingGameTest {
     @Test
     fun testAppScoreEqualsToTenWhenTenOne() {
         val game = BowlingGame()
-        for(i in 0..10) {
+        for(i in 0..9) {
             game.roll(1)
         }
 
-        assertThat(game.score(), equalTo(1))
+        assertThat(game.score(), equalTo(10))
     }
 }
