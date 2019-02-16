@@ -9,10 +9,10 @@ class BowlingUtils {
         }
 
         fun getNextRollValue(playedFrames: List<Frame>, index: Int): Int {
-            if (playedFrames.size == index -1) {
-                return 0
+            return if (playedFrames.size == index - 1) {
+                0
             } else {
-                return playedFrames[index + 1].rolls[0].pins
+                playedFrames[index + 1].rolls[0].pins
             }
         }
     }
