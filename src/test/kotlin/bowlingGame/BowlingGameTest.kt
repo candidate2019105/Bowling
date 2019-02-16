@@ -6,7 +6,6 @@ package test.kotlin.bowlingGame
 import main.kotlin.bowlingGame.BowlingGame
 import org.hamcrest.core.IsEqual.equalTo
 import org.junit.Assert.assertThat
-import org.junit.Assert.fail
 import org.junit.Before
 import org.junit.Test
 
@@ -19,9 +18,17 @@ class BowlingGameTest {
         game = BowlingGame()
     }
 
+    private fun rollSpare() {
+        game.roll(5)
+        game.roll(5) // Spar
+    }
 
-    private fun rollPinsNTimes(times :Int , pins: Int) {
-        for(i in 0 until times) {
+    private fun rollStrike() {
+        game.roll(10)
+    }
+
+    private fun rollPinsNTimes(times: Int, pins: Int) {
+        for (i in 0 until times) {
             game.roll(pins)
         }
     }
@@ -40,11 +47,20 @@ class BowlingGameTest {
 
     @Test
     fun testWithSpare() {
-        game.roll(6)
-        game.roll(4) // Spare
+        rollSpare()
         game.roll(5)
 
         rollPinsNTimes(17, 0)
         assertThat(game.score(), equalTo(20))
+    }
+
+    @Test
+    fun testWithStrike() {
+        rollStrike()
+        game.roll(5)
+        game.roll(4)
+
+        rollPinsNTimes(16, 0)
+        assertThat("On strike you must add the two next roll", game.score(), equalTo(28))
     }
 }
