@@ -40,6 +40,11 @@ class BowlingGameTest {
 
     @Test
     fun testWithSpare() {
-        fail("todo")
+        game.roll(6)
+        game.roll(4) // Spare
+        game.roll(5)
+
+        rollPinsNTimes(17, 0)
+        assertThat(game.score(), equalTo(20))
     }
 }
