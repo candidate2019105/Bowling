@@ -4,6 +4,7 @@
 package main.kotlin.bowlingGame
 
 import main.kotlin.bowlingGame.model.Frame
+import main.kotlin.bowlingGame.uils.BowlingUtils
 
 class BowlingGame {
     var playedFrames = mutableListOf<Frame>()
@@ -26,9 +27,14 @@ class BowlingGame {
     fun score(): Int? {
         var score = 0
 
-        val it = playedFrames.iterator()
-        while (it.hasNext()) {
-            score += it.next().score()
+        for ((index, element) in playedFrames.withIndex()) {
+            score +=
+                    if (BowlingUtils.isSpare(element)) {
+                        val rollValue = BowlingUtils.getNextRollValue(playedFrames, index)
+                        (10 + rollValue)
+                    } else {
+                        element.score()
+                    }
         }
 
         return score
