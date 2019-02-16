@@ -53,14 +53,4 @@ class BowlingGameTest {
         rollPinsNTimes(17, 0)
         assertThat("On Spare you must add only next roll to current score", game.score(), equalTo(20))
     }
-
-    @Test
-    fun testWithStrike() {
-        rollStrike()
-        game.roll(5)
-        game.roll(4)
-
-        rollPinsNTimes(16, 0)
-        assertThat("On strike you must add the two next roll", game.score(), equalTo(28))
-    }
 }
