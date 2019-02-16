@@ -3,13 +3,19 @@
  */
 package main.kotlin.bowlingGame
 
-import main.kotlin.bowlingGame.model.Frame
-
 class BowlingGame {
-    val greeting: String
-        get() {
-            return "Hello world."
-        }
+    fun roll(i: Int) {
+
+    }
+
+    fun start() {
+
+    }
+
+    fun score(): Int? {
+        return 0
+    }
+
 }
 
 fun main(args: Array<String>) {
