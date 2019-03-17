@@ -3,15 +3,16 @@
  */
 package test.kotlin.bowlingGame
 
+import Parameters.Companion.MAX_PIN_NUMBER
 import Parameters.Companion.MAX_ROUNDS
 import main.kotlin.bowlingGame.BowlingGame
-import org.hamcrest.core.IsEqual.equalTo
-import org.hamcrest.core.IsNot.not
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.not
 import org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Test
-import java.util.*
 import kotlin.random.Random
+import kotlin.test.assertTrue
 
 class BowlingGameTest {
 
@@ -95,6 +96,17 @@ class BowlingGameTest {
     }
 
     @Test
+    fun testFrameNeverGetMoreThanPinAllowed() {
+        while (game.playedFrames.size < MAX_ROUNDS) {
+            rollRandom()
+        }
+
+        for (frame in game.playedFrames) {
+            assertTrue("This score should be max $MAX_PIN_NUMBER") { frame.score() <= MAX_PIN_NUMBER }
+        }
+    }
+
+    @Test
     fun testRandomGame() {
         while (game.playedFrames.size < MAX_ROUNDS) {
             rollRandom()
@@ -102,7 +114,7 @@ class BowlingGameTest {
 
 
         for (frame in game.playedFrames) {
-            print("{${frame.rolls.joinToString (separator = ", ") { it -> "${it.pins}" }}}")
+            print("{${frame.rolls.joinToString(separator = ", ") { it -> "${it.pins}" }}}")
         }
 
         assertThat("What's happening here? ${game.playedFrames}", game.score(), not(equalTo(1000)))
