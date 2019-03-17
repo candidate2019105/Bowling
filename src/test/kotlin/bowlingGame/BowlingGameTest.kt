@@ -5,7 +5,7 @@ package test.kotlin.bowlingGame
 
 import Parameters.Companion.MAX_PIN_NUMBER
 import Parameters.Companion.MAX_ROUNDS
-import main.kotlin.bowlingGame.BowlingGame
+import bowlingGame.BowlingGame
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.CoreMatchers.not
 import org.junit.Assert.assertThat

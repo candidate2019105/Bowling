@@ -1,3 +1,3 @@
-package main.kotlin.bowlingGame.model
+package bowlingGame.model
 
 class Roll(val pins: Int)

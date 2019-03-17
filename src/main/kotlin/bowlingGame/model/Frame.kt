@@ -1,12 +1,14 @@
-package main.kotlin.bowlingGame.model
+package bowlingGame.model
 
+import Parameters.Companion.DEFAULT_BASE_SCORE
 import Parameters.Companion.MAX_PIN_NUMBER
+import Parameters.Companion.MAX_ROLL_PER_FRAME
 
 open class Frame {
     val rolls = mutableListOf<Roll>()
 
     fun score() : Int {
-        var score = 0
+        var score = DEFAULT_BASE_SCORE
         for(roll in rolls) {
             score += roll.pins
         }
@@ -14,7 +16,7 @@ open class Frame {
     }
 
     fun mayRollAgain(): Boolean {
-        return rolls.size < 2 && rolls[0].pins != 10
+        return rolls.size < MAX_ROLL_PER_FRAME && rolls[0].pins != MAX_PIN_NUMBER
     }
 
     fun roll(i: Int) {
