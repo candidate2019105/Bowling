@@ -7,11 +7,11 @@ import bowlingGame.model.Frame
 class BowlingUtils {
     companion object {
         fun isSpare(element: Frame): Boolean {
-            return element.rolls.size == MAX_ROLL_PER_FRAME && element.score() == MAX_PIN_NUMBER
+            return element.rolls.size == MAX_ROLL_PER_FRAME && element.computeScore() == MAX_PIN_NUMBER
         }
 
         fun isStrike(element: Frame): Boolean {
-            return element.rolls.size == 1 && element.score() == MAX_PIN_NUMBER
+            return element.rolls.size == 1 && element.computeScore() == MAX_PIN_NUMBER
         }
 
         fun spareBonus(playedFrames: List<Frame>, index: Int): Int {
@@ -25,9 +25,9 @@ class BowlingUtils {
         private fun getTwoRollValue(playedFrames: List<Frame>, index: Int): Int {
             val nextFrame = playedFrames[index + 1]
             return if (nextFrame.rolls.size == MAX_ROLL_PER_FRAME) {
-                nextFrame.score()
+                nextFrame.computeScore()
             } else {
-                nextFrame.score() + playedFrames[index + MAX_ROLL_PER_FRAME].rolls[0].pins
+                nextFrame.computeScore() + playedFrames[index + MAX_ROLL_PER_FRAME].rolls[0].pins
             }
         }
     }

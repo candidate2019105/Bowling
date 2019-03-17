@@ -15,18 +15,18 @@ import bowlingGame.uils.BowlingUtils.Companion.strikeBonus
 class BowlingGame {
     var playedFrames = mutableListOf<Frame>()
 
-    fun roll(i: Int) {
+    fun roll(pinsHit: Int) {
         if (playedFrames.isNotEmpty() &&
                 playedFrames.last().mayRollAgain()) {
-            playedFrames.last().roll(i)
+            playedFrames.last().roll(pinsHit)
         } else {
             val frame = if (playedFrames.size >= MAX_ROUNDS) BonusFrame() else Frame()
-            frame.roll(i)
+            frame.roll(pinsHit)
             playedFrames.add(frame)
         }
     }
 
-    fun score(): Int? {
+    fun computeScore(): Int? {
         var score = DEFAULT_BASE_SCORE
 
         for ((index, element) in playedFrames.withIndex()) {
@@ -35,7 +35,7 @@ class BowlingGame {
             score += when {
                 BowlingUtils.isStrike(element) -> MAX_PIN_NUMBER + strikeBonus(playedFrames, index)
                 BowlingUtils.isSpare(element) -> MAX_PIN_NUMBER + spareBonus(playedFrames, index)
-                else -> element.score()
+                else -> element.computeScore()
             }
         }
 
@@ -48,11 +48,11 @@ fun main(args: Array<String>) {
 
     for (element in args) {
         when (element) {
-            "-" -> game.roll(MAX_PIN_NUMBER - game.playedFrames.last().score())
+            "-" -> game.roll(MAX_PIN_NUMBER - game.playedFrames.last().computeScore())
             "x" -> game.roll(MAX_PIN_NUMBER)
             else -> element.toIntOrNull()?.let { game.roll(it) }
         }
     }
 
-    println("Your score is : ${game.score()}")
+    println("Your computeScore is : ${game.computeScore()}")
 }
