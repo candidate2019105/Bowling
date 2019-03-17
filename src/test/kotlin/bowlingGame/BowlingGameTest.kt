@@ -3,11 +3,15 @@
  */
 package test.kotlin.bowlingGame
 
+import Parameters.Companion.MAX_ROUNDS
 import main.kotlin.bowlingGame.BowlingGame
 import org.hamcrest.core.IsEqual.equalTo
+import org.hamcrest.core.IsNot.not
 import org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Test
+import java.util.*
+import kotlin.random.Random
 
 class BowlingGameTest {
 
@@ -31,6 +35,10 @@ class BowlingGameTest {
         for (i in 0 until times) {
             game.roll(pins)
         }
+    }
+
+    private fun rollRandom() {
+        game.roll(Random.nextInt(until = 10))
     }
 
     @Test
@@ -84,5 +92,20 @@ class BowlingGameTest {
         rollSpare()
         rollPinsNTimes(1, 5)
         assertThat("On spare you must add the two next roll", game.score(), equalTo(150))
+    }
+
+    @Test
+    fun testRandomGame() {
+        while (game.playedFrames.size < MAX_ROUNDS) {
+            rollRandom()
+        }
+
+
+        for (frame in game.playedFrames) {
+            print("{${frame.rolls.joinToString (separator = ", ") { it -> "${it.pins}" }}}")
+        }
+
+        assertThat("What's happening here? ${game.playedFrames}", game.score(), not(equalTo(1000)))
+
     }
 }
