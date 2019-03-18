@@ -107,7 +107,7 @@ class BowlingGameTest {
 
     @Test
     fun testRandomGame() {
-        while (game.playedFrames.size <= MAX_ROUNDS) {
+        while (game.playedFrames.size < MAX_ROUNDS) {
             rollRandom()
         }
 
@@ -116,7 +116,6 @@ class BowlingGameTest {
             print("{${frame.rolls.joinToString(separator = ", ") { it -> "${it.pins}" }}}")
         }
 
-        assertThat("What's happening here? ${game.playedFrames}", game.computeScore(), not(equalTo(1000)))
-
+        assertThat("Max roll should be $MAX_ROUNDS", game.playedFrames.size, equalTo(MAX_ROUNDS))
     }
 }
